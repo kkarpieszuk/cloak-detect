@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cloak Detect — wykrywanie cloakingu</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>Cloak Detect</h1>
+        <p class="subtitle">
+          Sprawdź, czy strona serwuje tę samą treść dla zwykłej przeglądarki i
+          Googlebota. Narzędzie odwiedza podany adres w obu profilach i
+          pokazuje zrzuty ekranu obok siebie.
+        </p>
+      </header>
+
+      <form id="analyze-form" class="form" novalidate>
+        <label class="form-label" for="url-input">Adres strony do przetestowania</label>
+        <div class="form-row">
+          <input
+            id="url-input"
+            name="url"
+            type="url"
+            required
+            placeholder="https://example.com"
+            autocomplete="url"
+          />
+          <button type="submit" id="submit-btn">Sprawdź</button>
+        </div>
+      </form>
+
+      <p id="error-message" class="error-message" hidden role="alert"></p>
+
+      <section id="loading" class="loading" hidden aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Odwiedzam jako przeglądarka i Googlebot…</p>
+        <p class="loading-hint">To może potrwać do ok. 30 sekund.</p>
+      </section>
+
+      <section id="hint-banner" class="hint-banner" hidden role="status"></section>
+
+      <section id="results" class="results" hidden>
+        <div class="result-column" id="column-browser"></div>
+        <div class="result-column" id="column-googlebot"></div>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
