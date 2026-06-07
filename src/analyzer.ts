@@ -29,8 +29,14 @@ export interface AnalyzeResult {
 let browserInstance: Browser | null = null;
 
 export async function getBrowser(): Promise<Browser> {
+  if (browserInstance && !browserInstance.isConnected()) {
+    browserInstance = null;
+  }
   if (!browserInstance) {
     browserInstance = await chromium.launch({ headless: true });
+    browserInstance.on("disconnected", () => {
+      browserInstance = null;
+    });
   }
   return browserInstance;
 }
